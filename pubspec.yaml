@@ -3,7 +3,7 @@ description: A new Flutter project, part of Section 6 of " Complete Flutter App 
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -12,18 +12,25 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: 1.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: 2.0.3
 
 flutter:
 
   uses-material-design: true
 
   assets:
-     - images/
-     #- images/a_dot_ham.jpeg
+     - assets/images/6879473.jpeg
+
+  fonts:
+    - family: Pacifico
+      fonts:
+        - asset: assets/fonts/pacifico/Pacifico-Regular.ttf
+    - family: Source Sans 3
+      fonts:
+        - asset: assets/fonts/source_sans_3/SourceSans3-Regular.ttf

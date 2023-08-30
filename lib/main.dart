@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const BusinessCardApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class BusinessCardApp extends StatelessWidget {
+  const BusinessCardApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,55 +16,81 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const CardMainContent(
+        name: 'Danilo de Queiroz',
+        imageUrl: "https://avatars.githubusercontent.com/u/6879473",
+        role: "Android / Flutter Developer",
+        phone: "+44 123 4567 8901",
+        email: "angela@email.com",
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class CardMainContent extends StatefulWidget {
+  const CardMainContent(
+      {super.key,
+      required this.name,
+      required this.imageUrl,
+      required this.role,
+      required this.phone,
+      required this.email});
 
-
-  final String title;
+  final String name;
+  final String imageUrl;
+  final String role;
+  final String phone;
+  final String email;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<CardMainContent> createState() => _CardMainContentState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _CardMainContentState extends State<CardMainContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
+      backgroundColor: [
+        Colors.teal,
+        Colors.teal[200],
+      ].first,
+      body: SafeArea(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 50.0,
+              backgroundColor: Colors.transparent,
+              child: ClipOval(
+                child: FadeInImage.assetNetwork(
+                  placeholder: "assets/images/6879473.jpeg",
+                  image: widget.imageUrl,
+                ),
+              ),
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              widget.name,
+              style: const TextStyle(
+                fontSize: 32,
+                color: Colors.white70,
+                fontFamily: "Pacifico",
+                fontWeight: FontWeight.bold
+              ),
             ),
+            Text(
+              widget.role.toUpperCase(),
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.teal.shade100,
+                  fontFamily: "Source Sans 3",
+                  fontWeight: FontWeight.bold,
+                letterSpacing: 2.5,
+              ),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
