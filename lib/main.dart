@@ -64,28 +64,37 @@ class _CardMainContentState extends State<CardMainContent> {
               radius: 50.0,
               backgroundColor: Colors.transparent,
               child: ClipOval(
-                child: FadeInImage.assetNetwork(
-                  placeholder: "assets/images/6879473.jpeg",
-                  image: widget.imageUrl,
+                child: Image.network(
+                  widget.imageUrl,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    /// While the progress is not reched,
+                    /// returns a asset instead
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return Image.asset("assets/images/6879473.jpeg");
+                  },
+                  errorBuilder: (context, error, stackTrace) =>
+                      Image.asset("assets/images/6879473.jpeg"),
                 ),
               ),
             ),
             Text(
               widget.name,
               style: const TextStyle(
-                fontSize: 32,
-                color: Colors.white70,
-                fontFamily: "Pacifico",
-                fontWeight: FontWeight.bold
-              ),
+                  fontSize: 32,
+                  color: Colors.white70,
+                  fontFamily: "Pacifico",
+                  fontWeight: FontWeight.bold),
             ),
             Text(
               widget.role.toUpperCase(),
               style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.teal.shade100,
-                  fontFamily: "Source Sans 3",
-                  fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.teal.shade100,
+                fontFamily: "Source Sans 3",
+                fontWeight: FontWeight.bold,
                 letterSpacing: 2.5,
               ),
             )
@@ -94,4 +103,15 @@ class _CardMainContentState extends State<CardMainContent> {
       ),
     );
   }
+}
+
+Center circularProgressIndicator(ImageChunkEvent loadingProgress){
+    return Center(
+      child: CircularProgressIndicator(
+        value: loadingProgress.expectedTotalBytes != null
+            ? loadingProgress.cumulativeBytesLoaded /
+            loadingProgress.expectedTotalBytes!
+            : null,
+      ),
+    );
 }
