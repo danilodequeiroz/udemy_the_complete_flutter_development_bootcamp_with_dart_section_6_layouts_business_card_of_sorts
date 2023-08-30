@@ -21,7 +21,7 @@ class BusinessCardApp extends StatelessWidget {
         imageUrl: "https://avatars.githubusercontent.com/u/6879473",
         role: "Android / Flutter Developer",
         phone: "+44 123 4567 8901",
-        email: "angela@email.com",
+        email: "danilo@email.com",
       ),
     );
   }
@@ -97,6 +97,27 @@ class _CardMainContentState extends State<CardMainContent> {
                 fontWeight: FontWeight.bold,
                 letterSpacing: 2.5,
               ),
+            ),
+            Container(
+              color: Colors.white70,
+              child: Row(
+                children: [
+                  Icon(Icons.phone),
+                  SizedBox(width: 10.0,),
+                  Text(widget.phone),
+                ],
+              ),
+            ),
+            Container(
+              color: Colors.white70,
+              child: Row(
+                children: [
+                  Icon(Icons.email),
+                  SizedBox(width: 10.0,),
+                  Text(widget.email),
+                ],
+              ),
+
             )
           ],
         ),
