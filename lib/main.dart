@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_the_complete_flutter_development_bootcamp_with_dart_section_6_layouts_business_card_of_sorts/font_names.dart';
 
 void main() {
   runApp(const BusinessCardApp());
@@ -85,7 +86,7 @@ class _CardMainContentState extends State<CardMainContent> {
               style: const TextStyle(
                   fontSize: 32,
                   color: Colors.white70,
-                  fontFamily: "Pacifico",
+                  fontFamily: FontNames.pacifico,
                   fontWeight: FontWeight.bold),
             ),
             Text(
@@ -93,32 +94,13 @@ class _CardMainContentState extends State<CardMainContent> {
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.teal.shade100,
-                fontFamily: "Source Sans 3",
+                fontFamily: FontNames.sourceSans3,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 2.5,
               ),
             ),
-            Container(
-              color: Colors.white70,
-              child: Row(
-                children: [
-                  Icon(Icons.phone),
-                  SizedBox(width: 10.0,),
-                  Text(widget.phone),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.white70,
-              child: Row(
-                children: [
-                  Icon(Icons.email),
-                  SizedBox(width: 10.0,),
-                  Text(widget.email),
-                ],
-              ),
-
-            )
+            contactCard(icon: Icons.phone, phone: widget.phone),
+            contactCard(icon: Icons.email, phone: widget.email),
           ],
         ),
       ),
@@ -126,13 +108,43 @@ class _CardMainContentState extends State<CardMainContent> {
   }
 }
 
-Center circularProgressIndicator(ImageChunkEvent loadingProgress){
-    return Center(
-      child: CircularProgressIndicator(
-        value: loadingProgress.expectedTotalBytes != null
-            ? loadingProgress.cumulativeBytesLoaded /
-            loadingProgress.expectedTotalBytes!
-            : null,
-      ),
-    );
+Container contactCard({required IconData icon, required String phone}) {
+  return Container(
+    color: Colors.white70,
+    margin: const EdgeInsets.symmetric(
+      vertical: 10,
+      horizontal: 25,
+    ),
+    padding: const EdgeInsets.all(10),
+    child: Row(
+      children: [
+        Icon(
+          icon,
+          color: Colors.teal,
+        ),
+        const SizedBox(
+          width: 10.0,
+        ),
+        Text(
+          phone,
+          style: TextStyle(
+            color: Colors.teal.shade900,
+            fontFamily: FontNames.sourceSans3,
+            fontSize: 20.0,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Center circularProgressIndicator(ImageChunkEvent loadingProgress) {
+  return Center(
+    child: CircularProgressIndicator(
+      value: loadingProgress.expectedTotalBytes != null
+          ? loadingProgress.cumulativeBytesLoaded /
+              loadingProgress.expectedTotalBytes!
+          : null,
+    ),
+  );
 }
